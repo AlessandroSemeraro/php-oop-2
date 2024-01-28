@@ -6,6 +6,7 @@ class Product {
     public $name;
     public $description;
     public $price;
+    public $category;
     public $image;
 
     /**
@@ -16,12 +17,13 @@ class Product {
      * @param float $price  price ticket
      * @param [type] $image
      */
-    public function __construct(string $name , string $description, float $price, $image) {
+    public function __construct(string $image, string $name , string $description, float $price, Category $category ) {
+        $this -> image = $image;
         $this -> name= $name;
         $this -> description = $description;
         $this-> price = $price;
-        $this-> image = $image;
-    }
+        $this-> category = $category;
+    }   
 
     public function getLenghtDescription(){
         return strlen ($this -> description);
