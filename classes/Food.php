@@ -6,18 +6,18 @@ class Food extends Product{
     public $proteins;
     public $additives;
     
-
+    //prendo tutte le info Product e aggiungo info di Food
     public function __construct(string $_image, string $_name, string $_description, float $_price, Category $_category , string $_vitamins, string $_proteins, string $_additives)
-    {   
-        $this->image = $_image;
-        $this->name = $_name;
-        $this->description = $_description;
-        $this->price = $_price;
-        $this->category = $_category;
+
+    {   //richiamo i costruttori di product
+        parent :: __construct($_image,$_name,$_description,$_price,$_category);
+
+        //aggiungo info Food
         $this->vitamins = $_vitamins;
         $this->proteins = $_proteins;
         $this->additives = $_additives;
 }
+
 }
 
 

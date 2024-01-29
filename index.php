@@ -5,14 +5,15 @@ include_once __DIR__ . '/classes/Food.php';
 include_once __DIR__ . '/classes/Toy.php';
 include_once __DIR__ . '/classes/Kennel.php';
 
-
+$catCategory = new Category('cat','https://static.thenounproject.com/png/6725-200.png');
+$dogCategory = new Category('dog','https://static.thenounproject.com/png/61386-200.png');
 
 $croccantiniSuper = new Food(
     "https://shop-cdn-m.mediazs.com/bilder/mera/puppy/mix/di/ossi/9/800/26635_pla_meradog_puppyknochen_10kg_9.jpg",
     "Farmina N&D Grain Free Pumpkin ",
     "Farmina N&D Grain Free Pumpkin Puppy Medium/Maxi Agnello e Mirtillo è l'alimento secco completo per cani cuccioli di taglia media e grande e per cagne in gestazione o in allattamento.",
     59.79,
-    new Category("dog"),
+    $dogCategory,
     "Vitamina C 160mg,Niacina 40mg",
     "proteine di agnello disidratate (24%)",
     "Additivi organolettici: estratto di tè verde 100mg"
@@ -23,15 +24,36 @@ $bilboToy = new Toy(
     "Interactive Soft Cat Balls",
     "Cat toys ball with a nice high frequency jingle that gets your cats' attention and keeps them occupied",
     24.99,
-    new Category("cat"),
+    $catCategory,
     " L Size Bell Toys Ball (Size Diameter: 2.75 inch / 7 cm)",
     "blue",
     "plastic"
 );
 
-$bigKennel = new Kennel("https://cdn.manomano.com/images/images_products/34518009/L/122631781_1.jpg", "Sussex Dog Kennel And Run", "This range is our most popular and would make a great addition to your garden. It has the benefit of a covered roof, ensuring protection from the weather.  The heavy duty structure ensures a long lasting home for your dog.", 450.00, new Category("dog"), "180cm x 180cm x 120cm high", "dark-gray", "iron");
+$bigKennel = new Kennel(
+    "https://cdn.manomano.com/images/images_products/34518009/L/122631781_1.jpg",
+    "Sussex Dog Kennel And Run",
+    "This range is our most popular and would make a great addition to your garden. It has the benefit of a covered roof, ensuring protection from the weather.  The heavy duty structure ensures a long lasting home for your dog.",
+    450.00,
+    $dogCategory,
+    "180cm x 180cm x 120cm high",
+    "dark-gray",
+    "iron"
+);
 
-$listProducts = [$croccantiniSuper, $bilboToy, $bigKennel];
+$goodBoyBone = new Toy(
+    "https://m.media-amazon.com/images/I/61rQigh3aoL._AC_SL1500_.jpg",
+    "KONG Goodie Bone",
+    "Dog Bone Toy for Medium-Sized Breeds",
+    21.00,
+    $dogCategory,
+    " 7.25 inches long / 20cm lungo",
+    "red",
+    "leather"
+);
+
+$listProducts = [$croccantiniSuper, $bilboToy, $bigKennel,$goodBoyBone];
+
 
 ?>
 
@@ -71,20 +93,54 @@ $listProducts = [$croccantiniSuper, $bilboToy, $bigKennel];
                             <img src="<?php echo $product->image; ?>" class="card-img-top img-fluid" alt="...">
                             <div class="card-body">
                                 <ul>
-                                    <?php foreach ($product as $chiave => $valore) {
-                                        if (is_a($valore, 'Category')) { ?>
-                                            <li>
-                                                <?php echo $chiave; ?>: <?php echo $valore->name; ?>
-                                            </li>
-                                        <?php } else { ?>
-                                            <li>
-                                                <?php echo $chiave; ?>: <?php echo $valore; ?>
-                                            </li>
-                                    <?php }
-                                    } ?>
-                                    <a href="#" class="btn btn-primary">
-                                        <?php echo $product->getPrice(); ?>&euro;
-                                    </a>
+                                    <h2 class="card-title text-center">
+                                        <strong><?php echo $product->name; ?></strong>
+                                    </h2>
+                                    <p class="card-text">
+                                        <strong> Description </strong>: <?php echo $product->description; ?>
+                                    </p>
+                                    <p class="card-subtitle">
+                                        <strong>Product for </strong>: <?php echo $product->category->name; ?>
+                                    </p>
+                                    <p>  <strong>Characteristics:</strong> </p>
+                                        <ul class="list-group">
+                                                <?php if (is_a($product,'Food')){?>
+                                                    <li>
+                                                        <strong>Vitamins </strong> : <?php echo $product->vitamins; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Proteins </strong> : <?php echo $product->proteins; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Additives </strong> : <?php echo $product->additives; ?>
+                                                    </li>
+                                                <?php } ?>
+                                                <?php if (is_a($product,'Toy')){?>
+                                                    <li>
+                                                        <strong>Size </strong> : <?php echo $product->size; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Color </strong> : <?php echo $product->color; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Material </strong> : <?php echo $product->material; ?>
+                                                    </li>
+                                                <?php } ?>
+                                                <?php if (is_a($product,'Kennel')){?>
+                                                    <li>
+                                                        <strong>Size </strong> : <?php echo $product->size; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Color </strong> : <?php echo $product->color; ?>
+                                                    </li>
+                                                    <li>
+                                                        <strong>Material </strong> : <?php echo $product->material; ?>
+                                                    </li>
+                                                <?php } ?>
+                                        </ul>
+                                <a href="#" class="btn btn-primary">
+                                    <?php echo $product->getPrice(); ?>&euro;
+                                </a>
                                 </ul>
                             </div>
                         </div>
