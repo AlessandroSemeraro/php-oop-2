@@ -71,10 +71,7 @@ $listProducts = [$croccantiniSuper, $bilboToy, $bigKennel];
                             <img src="<?php echo $product->image; ?>" class="card-img-top img-fluid" alt="...">
                             <div class="card-body">
                                 <ul>
-
                                     <?php foreach ($product as $chiave => $valore) {
-
-                                        // var_dump($valore);
                                         if (is_a($valore, 'Category')) { ?>
                                             <li>
                                                 <?php echo $chiave; ?>: <?php echo $valore->name; ?>
@@ -85,22 +82,16 @@ $listProducts = [$croccantiniSuper, $bilboToy, $bigKennel];
                                             </li>
                                     <?php }
                                     } ?>
-
                                     <a href="#" class="btn btn-primary">
                                         <?php echo $product->getPrice(); ?>&euro;
                                     </a>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
             </section>
         </main>
-        <!--$this->description = $_description;
-        $this->price = $_price;
-        $this->category = $_category;
-        $this->vitamins = $_vitamins;
-        $this->proteins = $_proteins;
-        $this->additives = $_additives;-->
     </body>
 
 </html>
